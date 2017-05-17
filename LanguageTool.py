@@ -192,8 +192,8 @@ class startLanguageToolServerCommand(sublime_plugin.TextCommand):
 		jarPath = settings.get('languagetool_jar')
 		if jarPath:
 			if os.path.isfile(jarPath):
+				sublime.status_message('Starting local LanguageTool server ...')
 				cmd = ['java', '-jar', jarPath, 'org.languagetool.server.HTTPServer', '--port', '8081']
-				sublime.status_message('Starting local LanguageTool server ...'+cmd)
 				
 				if sublime.platform() == "windows":
 					p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, creationflags=subprocess.SW_HIDE)
