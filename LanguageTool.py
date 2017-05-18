@@ -193,12 +193,12 @@ class startLanguageToolServerCommand(sublime_plugin.TextCommand):
 		if jarPath:
 			if os.path.isfile(jarPath):
 				sublime.status_message('Starting local LanguageTool server ...')
-				cmd = ['java', '-jar', jarPath, 'org.languagetool.server.HTTPServer', '--port', '8081']
+				cmd = ['java', '-cp', jarPath, 'org.languagetool.server.HTTPServer', '--port', '8081']
 				
 				if sublime.platform() == "windows":
 					p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, creationflags=subprocess.SW_HIDE)
 				else:
-					p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+					p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
 			else:
 				showPanelText('Error, could not find LanguageTool\'s JAR file (%s)\n\nPlease install LT in this directory or modify the `languagetool_jar` setting.' % jarPath)
 
